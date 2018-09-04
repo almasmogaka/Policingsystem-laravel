@@ -20,7 +20,7 @@ class Crime extends Model
     	return $this->belongsTo('App\Crimetype');
     }
     public function state(){
-    	return $this->belongsTo('App\State');
+    	return $this->belongsTo('App\state');
     }
 
 	

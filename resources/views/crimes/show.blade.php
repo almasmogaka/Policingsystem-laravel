@@ -12,8 +12,11 @@
 					<div class="col-md-4">
 						<h4>Type of Crime:</h4>		
 					</div>
-					<div class="col-md-8">
+					<div class="col-md-6">
 						<h4>{{ $crime->crimetype->type }}</h4>
+					</div>
+					<div class="col-md-2">
+						<h4><a href="{{action('TestController@generatePDF', $crime->id) }}">crimepdf</a></h4>
 					</div>
 					
 				</div><hr>
@@ -73,10 +76,10 @@
 				</div><hr>
 				<div class="row">
 					<div class="col-md-4">
-						<h4>Time it happened:</h4>		
+						<h4>Evidence:</h4>		
 					</div>
 					<div class="col-md-8">
-						<h5>{{ $crime->time }}</h5>
+						<h5><img src="{{ asset('images/'.$crime->evidence) }}"</h5>
 					</div>
 					
 				</div><hr>
@@ -85,7 +88,7 @@
 						<h4>status of the crime:</h4>		
 					</div>
 					<div class="col-md-8">
-						<h4>{{ $crime->state->name }}</h4>
+						<h4>{{ $crime->state->status }}</h4>
 					</div>
 					
 				</div>

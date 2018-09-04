@@ -9,7 +9,7 @@
 
                 <div class="card-body">
 
-                    {!! Form::open(array('route' => 'crimes.store')) !!}
+                    {!! Form::open(array('route' => 'crimes.store', 'files'=>'true')) !!}
                 <div class="row">
                     <div class="col-md-4">
                         {{ Form::label('crimetype_id','Crime Type:') }}
@@ -27,7 +27,7 @@
                 
                     <div class="col-md-4" >
                         {{ Form::label('phone_no','Phone No.:') }}
-                        {{ Form::text('phone_no',null, array('class' => 'form-control', 'required'=>'','maxlength'=>'255')) }}
+                        {{ Form::tel('phone_no',null, array('class' => 'form-control', 'required'=>'','maxlength'=>'255')) }}
                     </div>
                 </div><hr>
                 <div class="row" >
@@ -41,17 +41,17 @@
                         {{ Form::label('l_occurred',"Areaa/Village/City:") }} 
                         {{ Form::text('l_occurred',null, array('class' => 'form-control', 'required'=>'','maxlength'=>'255')) }}
                     </div>                
-                    <div class="col-md-3" >
+                    <div class="col-md-2" >
                         {{ Form::label('l_address','Address:') }}
                         {{ Form::text('l_address',null, array('class' => 'form-control', 'required'=>'','maxlength'=>'255')) }}
+                    </div>
+                    <div class="col-md-4" >
+                        {{ Form::label('evidence','Available Evidence:') }}
+                        {{ Form::file('evidence') }}
                     </div>
                     <div class="col-md-3" >
                         {{ Form::label('date',"Date it Occurred:") }} 
                         {{ Form::date('date',\Carbon\Carbon::now(), null, array('class' => 'form-control', 'required'=>'','maxlength'=>'255')) }}
-                    </div>                
-                    <div class="col-md-3" >
-                        {{ Form::label('time','Time it Occurred:') }}
-                        {{ Form::Time('time',\Carbon\Carbon::now(), null, array('class' => 'form-control', 'required'=>'','maxlength'=>'255')) }}
                     </div>
                 </div><hr>
                 <div class="row" >
@@ -65,17 +65,14 @@
                         {{ Form::label('state_id',"status:" ) }}                     
                         <select class="form-control" name="state_id" > 
                         @foreach($states as $state)                       
-                            <option value='{{ $state->id }}'>{{ $state->name }}</option>                       
+                            <option value='{{ $state->id }}'>{{ $state->status }}</option>                       
                         @endforeach 
                         </select>
                     </div>
                 </div><hr>
 
                     {{ Form::submit('Register Crime', array('class' => 'btn btn-success btn-lg btn-block', 'style'=> 'margin-bottom: 20px;')) }}
-                    {!! Form::close() !!}
-                    
-
-                        
+                    {!! Form::close() !!}                       
                 </div>
             </div>
         </div>

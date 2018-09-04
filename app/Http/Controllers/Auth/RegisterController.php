@@ -39,11 +39,11 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth:admin');
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:admin');
 
-    }
+    // }
     public function index()
     {
         $users = User::all();
@@ -61,7 +61,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'id_no' => 'required|integer|unique:users',
+            'id_no' => 'required|integer|unique:users|regex:/([2-3])[0-9]{7}/|digits_between:8,8',
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'job_title' => 'required|string|max:255',

@@ -28,7 +28,7 @@
             <a class="nav-link {{ Request::is('crimes/create') ? "active" : ""}}" href="{{ route('crimes.create') }}">Register Crime</a>
           </li> 
           <li class="nav-item">
-            <a class="nav-link " href="#">Retrieve Crime</a>
+            <a class="nav-link " href="{{ route('crimes.index') }}">Retrieve Crime</a>
           </li> 
 
           <!-- Dropdown -->

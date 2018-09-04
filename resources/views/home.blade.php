@@ -6,23 +6,25 @@
         <div class="col-sm-12">
             <div class="card">
                 
-                  <div class="card-header">
-                    <form action="{{ route('crimes.index') }}" method="get">
-                        <div class="form-inline">
-                            <label >Crime Search : </label>
-                            <input type="text" name="search" class="form-control" placeholder="Search" value="{{ isset ($found) ? $found : '' }}">
-                            <button type="submit" class="btn btn-default">Search
-                            </button>                           
-                        </div>
-                    </form>
+                <div class="card-header">
+                    {!! Form::open(array('route' => 'crime.postsearch', 'class' => 'form-inline')) !!}
+
+                    {{ Form::label('search','Crime Search :') }}
+                    {{ Form::text('search',null, array('class' => 'form-control', 'placeholder'=>'Search', 'required'=>'','maxlength'=>'255')) }}
                     
-                  </div>
+                    {{ Form::submit('Search', array('class' => 'btn btn-default')) }}
+                    {!! Form::close() !!}
+                    
+                </div>
                   <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
                         </div>
                     @endif
+                  
+                    @if (count($crimes) > 0)
+
                     <table class="table">
                         <thead>
                             <th></th>
@@ -53,6 +55,7 @@
                         </tbody>
                         
                     </table>
+                    @endif
                     <div class="text-center">
                         {!! $crimes->links(); !!}
                         

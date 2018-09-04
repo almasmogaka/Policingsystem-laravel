@@ -13,6 +13,7 @@
 					<th>Status</th>
 					<td></td>
 					<td></td>
+					<td></td>
 				</thead>
 				<tbody>
 					
@@ -23,9 +24,10 @@
 						<td>{{ $crime->recordedby }}</td>
 						<td>{{ $crime->date }}</td>
 						<td>{{ date('M j,y h:ia', strtotime($crime->created_at)) }}</td>
-						<td>{{ $crime->state->name }}</td>
+						<td>{{ $crime->state->status }}</td>
 						<td><a href="{{ route('crimes.show', $crime->id) }}" class="btn btn-default btn-sm">View</a></td>
 						<td><a href="{{ route('crimes.edit', $crime->id) }}" class="btn btn-default btn-sm">Edit</a></td>
+						
 					</tr>
 				
 					@endforeach

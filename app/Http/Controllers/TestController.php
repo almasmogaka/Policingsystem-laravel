@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Test; 
 use App\Crime;
+use PDF;
 
 class TestController extends Controller
 {
@@ -40,35 +41,35 @@ class TestController extends Controller
     public function store(Request $request)
     {
         //
-      /**  $test = new Test;
+    //   /**  $test = new Test;
 
-        $this->validate($request, array(
-            'fname'=>'required',
-            'lname'=>'required',
-            'address'=>'required',
-            'p_residence'=>'required',
-            'phone_no'=>'required',
-            'l_occurred'=>'required',
-            'l_address'=>'required',
-            'op'=>'required',
-            'suspect'=>'required',           
+    //     $this->validate($request, array(
+    //         'fname'=>'required',
+    //         'lname'=>'required',
+    //         'address'=>'required',
+    //         'p_residence'=>'required',
+    //         'phone_no'=>'required',
+    //         'l_occurred'=>'required',
+    //         'l_address'=>'required',
+    //         'op'=>'required',
+    //         'suspect'=>'required',           
 
 
-        ));
+    //     ));
 
-        $test->fname=$request->fname;
-        $test->lname=$request->lname;
-        $test->address=$request->address;
-        $test->p_residence=$request->p_residence;
-        $test->phone_no=$request->phone_no;
-        $test->l_occurred=$request->l_occurred;
-        $test->l_address=$request->l_address;
-        $test->op=$request->op;
-        $test->suspect=$request->suspect;       
+    //     $test->fname=$request->fname;
+    //     $test->lname=$request->lname;
+    //     $test->address=$request->address;
+    //     $test->p_residence=$request->p_residence;
+    //     $test->phone_no=$request->phone_no;
+    //     $test->l_occurred=$request->l_occurred;
+    //     $test->l_address=$request->l_address;
+    //     $test->op=$request->op;
+    //     $test->suspect=$request->suspect;       
         
         
-        $test->save();
-        */
+    //     $test->save();
+    //     */
     }
         
     /**
@@ -116,5 +117,13 @@ class TestController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function generatePDF($id){
+
+        $crime = crime::find($id);
+
+        $pdf = PDF::loadView('pdf',  compact('crime'));
+
+        return $pdf->stream('crime.pdf');
     }
 }

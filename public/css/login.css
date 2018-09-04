@@ -1,0 +1,16 @@
+body {
+    background-image: url("../images/pex.jpeg");
+}
+.card {
+    margin-top: 70px;
+}
+.card-header {
+    text-align: center;
+    background-color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 25px;
+}
+.card-body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
+}

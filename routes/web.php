@@ -29,6 +29,8 @@ Route::prefix('admin')->group(function() {
   }); 
 		//crime routes
 Route::resource('crimes', 'CrimeController');
+Route::post('/search','HomeController@postsearch')->name('crime.postsearch');
+Route::get('/search','HomeController@getsearch')->name('crime.getsearch');
         //contact
 Route::resource('contact', 'ContactController');
         //crimetypes
@@ -38,6 +40,7 @@ Route::get('/planning', 'PagesController@planning')->name('planning');
 Route::get('/mission', 'PagesController@mission')->name('mission');
 Route::get('/', 'PagesController@homepage')->name('homepage');
 Route::get('/welcome2', 'PagesController@welcome2')->name('welcome2');
+Route::get('/crime/{id}','TestController@generatePDF')->name('crime.download');
 
 
 

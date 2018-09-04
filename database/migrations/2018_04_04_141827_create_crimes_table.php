@@ -21,9 +21,12 @@ class CreateCrimesTable extends Migration
             $table->text('description');            
             $table->string('l_occurred');
             $table->string('l_address');
-            $table->Date('date');
-            $table->Time('time');
-            $table->string('m_taken');                                   
+            $table->string('evidence');
+            $table->string('logo');
+            $table->Date('date');            
+            $table->string('m_taken');
+            $table->integer('state_id');
+            $table->integer('crimetype_id');                             
             $table->timestamps();
         });
     }

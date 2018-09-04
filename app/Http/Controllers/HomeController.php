@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+
 use App\Crimetype;
 use App\Crime;
 use Session;
+use DB;
 
 class HomeController extends Controller
 {
@@ -36,5 +37,14 @@ class HomeController extends Controller
     }
     public function about(){
         return view('pages.about');
+    }
+    public function postsearch(Request $request) {
+        //get the string data from the search form
+        $search = $request->input('search');
+
+        //checks the database if the record exists
+        $crimes = DB::table('crimes')->where('name', 'LIKE', '%'.$search . '%');
+
+        return view('home', compact('crimes', 'search'));
     }
 }

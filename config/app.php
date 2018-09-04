@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Police Information System'),
 
     /*
     |--------------------------------------------------------------------------
@@ -148,6 +148,9 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Collective\Remote\RemoteServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        
 
         /*
          * Package Service Providers...
@@ -213,6 +216,8 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'SSH' => Collective\Remote\RemoteFacade::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

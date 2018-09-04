@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Crime;
 use App\Crimetype;
-use App\State;
+use App\state;
 use Session;
+use Image;
 //use App\Http\Controllers\Auth;
 use Auth;
 
@@ -33,7 +34,7 @@ class CrimeController extends Controller
      */
     public function create()
     {
-        $states = State::all();
+        $states = state::all();
         $crimetypes = Crimetype::all();
         
         return view('crimes.create')->withcrimetypes($crimetypes)->withstates($states);
@@ -50,12 +51,12 @@ class CrimeController extends Controller
         //validation
         $this->validate($request, array(            
             'name'=>'required',            
-            'phone_no'=>'required',
+            'phone_no'=>'required|regex:/(07)[0-9]{8}/',
             'description'=>'required',
             'l_occurred'=>'required',
             'l_address'=>'required',
-            'date'=>'required',
-            'time'=>'required',            
+            'evidence' => 'sometimes',
+            'date'=>'required',            
             'm_taken'=>'required',
             'state_id'=>'integer|required',
             'crimetype_id'=>'integer|required'
@@ -71,18 +72,28 @@ class CrimeController extends Controller
         $crime->description=$request->description;
         $crime->l_occurred=$request->l_occurred;
         $crime->l_address=$request->l_address;
+        if ($request->hasFile('evidence')) {
+            $image = $request->file('evidence');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('images/' . $filename);
+            Image::make($image)->resize(100, 50)->save($location);
+  
+            $crime->evidence = $filename;
+          }
+          if ($location = public_path('images/KenyaPolice.jpg')) {
+        
+            $crime->logo ='KenyaPolice.jpg' ;
+          }
         $crime->date=$request->date;
-        $crime->time=$request->time;
         $crime->m_taken=$request->m_taken;
         $crime->state_id=$request->state_id;
-        $crime->crimetype_id=$request->crimetype_id;
+        $crime->crimetype_id=$request->crimetype_id;      
 
         $crime->save();
 
        Session::flash('success','Crime has been successfully saved');
 
-       return redirect()->route('crimes.index');
-       
+       return redirect()->route('crimes.index');     
 
     }
 
@@ -111,7 +122,7 @@ class CrimeController extends Controller
         $states = State::all();
         $st = array();
         foreach ($states as $state){
-        $st[$state->id] = $state->name;
+        $st[$state->id] = $state->status;
     }
         return view('crimes.edit')->withcrime($crime)->withstates($st);
     }
@@ -129,12 +140,11 @@ class CrimeController extends Controller
         //validate
          $this->validate($request, array(            
             'name'=>'required',            
-            'phone_no'=>'required',
+            'phone_no'=>'required|regex:/(07)[0-9]{8}/',
             'description'=>'required',
             'l_occurred'=>'required',
             'l_address'=>'required',
-            'date'=>'required',
-            'time'=>'required',            
+            'date'=>'required',            
             'm_taken'=>'required',
             'state_id'=>'integer|required'
             
@@ -147,7 +157,6 @@ class CrimeController extends Controller
         $crime->l_occurred=$request->l_occurred;
         $crime->l_address=$request->l_address;
         $crime->date=$request->date;
-        $crime->time=$request->time;
         $crime->m_taken=$request->m_taken;
         $crime->state_id=$request->state_id;
         
